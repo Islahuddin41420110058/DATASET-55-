@@ -7,7 +7,7 @@ function normalized(data){ // suhu dan kelembaban
 }
 
 function denormalized(data){
-    O = (data[0] * 0.4) + 0.490051113 // 0.497649258 = stdev  0.45 = avg
+    O = (data[0] * 0.45) + 0,497649258 // 0.497649258 = stdev  0.45 = avg
     L = (data[1] * 0.496233468) + 0.5625
     return [O, L]
 }
@@ -23,7 +23,7 @@ async function predict(data){
 
     try{
         // path load in public access => github
-        const path = 'https://raw.githubusercontent.com/Islahuddin41420110058/SKRIPSI/main/public/ex_model/model.json';
+        const path = 'https://raw.githubusercontent.com/Islahuddin41420110058/DATASET-55-/main/public/ex_model/model.json';
         const model = await tf.loadGraphModel(path);
         
         predict = model.predict(
