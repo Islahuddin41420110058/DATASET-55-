@@ -26,7 +26,7 @@ bot.onText(/\/start/, (msg) => {
 bot.onText(/\/predict/, (msg) => { 
     bot.sendMessage(
         msg.chat.id,
-        `input nilai K|S contohnya 50|30`
+        `input nilai S|K contohnya 30|50`
     );   
     state = 1;
 });
@@ -36,14 +36,13 @@ bot.on('message', (msg) => {
         s = msg.text.split("|");
         model.predict(
             [
-                parseFloat(s[1]),
-                parseFloat(s[0]) // string to float
-                
+                parseFloat(s[0]), // string to float
+                parseFloat(s[1])
             ]
         ).then((jres1)=>{
             console.log(jres1);
             
-            cls_model.classify([parseFloat(s[1]), parseFloat(s[0]), parseFloat(jres1[0]), parseFloat(jres1[1])]).then((jres2)=>{
+            cls_model.classify([parseFloat(s[0]), parseFloat(s[1]), parseFloat(jres1[0]), parseFloat(jres1[1])]).then((jres2)=>{
                 bot.sendMessage(
                         msg.chat.id,
                         `nilai pompa yang diprediksi adalah ${jres1[0]}`
@@ -68,11 +67,11 @@ bot.on('message', (msg) => {
     }
 })
 // routers
-r.get('/predict/:K/:S', function(req, res, next) {    
+r.get('/predict/:S/:K', function(req, res, next) {    
     model.predict(
         [
-            parseFloat(req.params.K), // string to float
-            parseFloat(req.params.S)
+            parseFloat(req.params.S), // string to float
+            parseFloat(req.params.K)
         ]
     ).then((jres)=>{
         res.json(jres);
@@ -80,17 +79,17 @@ r.get('/predict/:K/:S', function(req, res, next) {
 });
 
 //routers
-r.get('/classify/:K/:S', function(req, res, next) {    
+r.get('/classify/:S/:K', function(req, res, next) {    
     model.predict(
         [
-            parseFloat(req.params.K), // string to float
-            parseFloat(req.params.S)
+            parseFloat(req.params.S), // string to float
+            parseFloat(req.params.K)
         ]
     ).then((jres)=>{
         cls_model.classify(
             [
-                parseFloat(req.params.K), // string to float
-                parseFloat(req.params.S),
+                parseFloat(req.params.S), // string to float
+                parseFloat(req.params.K),
                 parseFloat(jres[0]),
                 parseFloat(jres[1])
             ]
@@ -106,9 +105,8 @@ r.get('/classify/:K/:S', function(req, res, next) {
             }
             
 //             jres_.split("|");
-           
-            const kelembaban = parseFloat(req.params.K);
-            const suhu = parseFloat(req.params.S)
+            const suhu = parseFloat(req.params.S);
+            const kelembaban = parseFloat(req.params.K)
            
             bot.sendMessage(
                     2128268907, //msg.id
