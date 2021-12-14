@@ -106,8 +106,9 @@ r.get('/classify/:K/:S', function(req, res, next) {
             }
             
 //             jres_.split("|");
-            const suhu = parseFloat(req.params.S);
-            const kelembaban = parseFloat(req.params.K)
+           
+            const kelembaban = parseFloat(req.params.K);
+            const suhu = parseFloat(req.params.S)
            
             bot.sendMessage(
                     2128268907, //msg.id
