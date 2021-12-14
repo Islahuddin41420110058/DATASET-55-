@@ -67,11 +67,11 @@ bot.on('message', (msg) => {
     }
 })
 // routers
-r.get('/predict/:S/:K', function(req, res, next) {    
+r.get('/predict/:K/:S', function(req, res, next) {    
     model.predict(
         [
-            parseFloat(req.params.S), // string to float
-            parseFloat(req.params.K)
+            parseFloat(req.params.K), // string to float
+            parseFloat(req.params.S)
         ]
     ).then((jres)=>{
         res.json(jres);
@@ -79,17 +79,17 @@ r.get('/predict/:S/:K', function(req, res, next) {
 });
 
 //routers
-r.get('/classify/:S/:K', function(req, res, next) {    
+r.get('/classify/:K/:S', function(req, res, next) {    
     model.predict(
         [
-            parseFloat(req.params.S), // string to float
-            parseFloat(req.params.K)
+            parseFloat(req.params.K), // string to float
+            parseFloat(req.params.S)
         ]
     ).then((jres)=>{
         cls_model.classify(
             [
-                parseFloat(req.params.S), // string to float
-                parseFloat(req.params.K),
+                parseFloat(req.params.K), // string to float
+                parseFloat(req.params.S),
                 parseFloat(jres[0]),
                 parseFloat(jres[1])
                 
@@ -106,8 +106,8 @@ r.get('/classify/:S/:K', function(req, res, next) {
             }
             
 //             jres_.split("|");
-            const suhu = parseFloat(req.params.S);
-            const kelembaban = parseFloat(req.params.K)
+            const kelembaban = parseFloat(req.params.K);
+            const suhu = parseFloat(req.params.S)
            
             bot.sendMessage(
                     2128268907, //msg.id
