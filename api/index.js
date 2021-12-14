@@ -36,20 +36,20 @@ bot.on('message', (msg) => {
         s = msg.text.split("|");
         model.predict(
             [
-                parseFloat(s[1]), // string to float
-                parseFloat(s[0])
+                parseFloat(s[0]), // string to float
+                parseFloat(s[1])
             ]
         ).then((jres1)=>{
             console.log(jres1);
             
-            cls_model.classify([parseFloat(s[1]), parseFloat(s[0]), parseFloat(jres1[1]), parseFloat(jres1[0])]).then((jres2)=>{
-                bot.sendMessage(
-                        msg.chat.id,
-                        `nilai kipas yang diprediksi adalah ${jres1[1]}`
-                );
+            cls_model.classify([parseFloat(s[0]), parseFloat(s[1), parseFloat(jres1[0]), parseFloat(jres1[1])]).then((jres2)=>{
                 bot.sendMessage(
                         msg.chat.id,
                         `nilai pompa yang diprediksi adalah ${jres1[0]}`
+                );
+                bot.sendMessage(
+                        msg.chat.id,
+                        `nilai kipas yang diprediksi adalah ${jres1[1]}`
                 ); 
                 bot.sendMessage(
                         msg.chat.id,
@@ -90,8 +90,8 @@ r.get('/classify/:S/:K', function(req, res, next) {
             [
                 parseFloat(req.params.S), // string to float
                 parseFloat(req.params.K),
-                parseFloat(jres[1]),
-                parseFloat(jres[0])
+                parseFloat(jres[0]),
+                parseFloat(jres[1])
                 
             ]
         ).then((jres_)=>{
