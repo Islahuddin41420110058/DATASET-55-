@@ -7,7 +7,7 @@ function normalized(data){ // suhu dan kelembaban
 }
 
 function denormalized(data){
-    O = (data[0] * 0.45) + 0,497649258 // 0.497649258 = stdev  0.45 = avg
+    O = (data[0] * 0.45) + 0.497649258 // 0.497649258 = stdev  0.45 = avg
     L = (data[1] * 0.496233468) + 0.5625
     return [O, L]
 }
